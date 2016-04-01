@@ -8,8 +8,8 @@
     //LOADER
 
 var React = require('react');
-var FishBox = require('./fishcomps/fishbox');
-var FishJumbotron = require('./fishcomps/fishjumbo');
+var FishBox = require('./fishcomps/FishBox');
+var FishJumbotron = require('./fishcomps/FishJumbo');
 
 var FishApp = React.createClass({
 

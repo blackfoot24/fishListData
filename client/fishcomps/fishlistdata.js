@@ -1,6 +1,6 @@
 var React = require('react');
-var Loader = require('./fishloader');
-var FishList = require('./fishlist');
+var Loader = require('./FishLoader');
+var FishList = require('./FishList');
 
 var fishData = React.createClass({
 

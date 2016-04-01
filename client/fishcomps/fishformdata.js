@@ -1,5 +1,5 @@
 var React = require('react');
-var FishForm = require('./fishform');
+var FishForm = require('./FishForm');
 
 var FishFormData = React.createClass({
   getInitialState: function() {

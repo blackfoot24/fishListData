@@ -8,9 +8,9 @@
     //LOADER
 
 var React = require('react');
-var FishListData = require('./fishlistdata');
-var FishFormData = require('./fishformdata');
-var FishDetailsData = require('./fishdetailsdata');
+var FishListData = require('./FishListData');
+var FishFormData = require('./FishFormData');
+var FishDetailsData = require('./FishDetailsData');
 //FishBox
   //FishList
     //FishCard

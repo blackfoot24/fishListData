@@ -8,7 +8,7 @@
     LOADER*/
 
 var React = require('react');
-var FishCard = require('./fishcard');
+var FishCard = require('./FishCard');
 
 function FishList(props) {
   console.log("Props in fish list", props);
