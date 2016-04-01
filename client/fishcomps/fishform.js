@@ -1,95 +1,46 @@
-  //FISHAPP
-    //FISHBOX
-      //TOGGLER
-      //FISHLIST
-        //FISHCARD
-      //FISHFORM
-    //JUMBOTRON
-    //LOADER
+  /*FISHAPP
+        FISHBOX
+              FISHDATA-(get all fish) LOADER is being called in here.
+                  FISHLIST-stateless function.
+                      FISHCARD-stateless function
+              TOGGLER-stateless function
+        JUMBOTRON-stateless function
+
+FISHFORM-stateless function being called in fish form.
+LOADER is on its own. It is stateless function. It is not 
+on the tree. It is being used in FISHLIST*/
 
 var React = require('react');
 
-
-var FishForm = React.createClass({
-  getInitialState: function() {
-    return {
-      fishName: null,
-      peopleEater: null,
-      color: null,
-      img: null,
-      length: null,
-    }
-  },
-
-  onNameChange: function(event) {
-    this.setState({ fishName: event.target.value })
-    console.log("name", this.state.fishName)
-  },
-  onColorChange: function(event) {
-    this.setState({ color: event.target.value })
-    console.log("color", this.state.color)
-  },
-
-  onLengthChange: function(event) {
-    this.setState({ length: event.target.value })
-    console.log("length", this.state.length)
-  },
-
-  onPeopleEaterChange: function(event) {
-    this.setState({ peopleEater: event.target.value })
-    console.log("people_eater", this.state.peopleEater)
-  },
-
-  onImageChange: function(event) {
-    this.setState({ img: event.target.value })
-    console.log("image", this.state.img)
-  },
-
-  handleFormSubmit: function(event) {
-    event.preventDefault();
-    var fishData = {
-      name: this.state.fishName.trim(),
-      color: this.state.color.trim(),
-      length: this.state.length.trim(),
-      img: this.state.img.trim(),
-      people_eater: this.state.peopleEater
-    };
-
-    console.log("your fish: ", fishData);
-
-    this.props.submitFishToServer(fishData);
-    this.setState({name: '', color: '', length: '', img: '', people_eater: ''})
-
-  },
-
-  render: function () {
+function FishForm(props) {
     return (
      <div>
-      <form onSubmit={ this.handleFormSubmit }>
+      <form onSubmit={ props.onSubmitFishToServer }>
         <h3> Enter New Fish </h3>
         <fieldset className="form-group">
           <label>name</label>
-          <input onChange={this.onNameChange} value={this.state.fishName} type="text" className="form-control"/>
+          <input onChange={props.onNameChange} value={props.fishName} type="text" className="form-control"/>
         </fieldset>
 
         <fieldset className="form-group">
           <label>color</label>
-          <input onChange={this.onColorChange} value={this.state.color} type="text" className="form-control"/>
+          <input onChange={props.onColorChange} value={props.color} type="text" className="form-control"/>
         </fieldset>
 
         <fieldset className="form-group">
           <label>length</label>
-          <input onChange={this.onLengthChange} value={this.state.length} type="text" className="form-control"/>
+          <input onChange={props.onLengthChange} value={props.length} type="text" className="form-control"/>
         </fieldset>
 
         <fieldset className="form-group">
           <label>img src</label>
-          <input onChange={this.onImageChange} value={this.state.onImageChange} type="text" className="form-control"/>
+          <input onChange={props.onImageChange} value={props.onImageChange} type="text" className="form-control"/>
         </fieldset>
 
         <fieldset className="form-group">
           <label htmlFor="exampleSelect1">Man Eater?</label>
-          <select onChange={ this.onPeopleEaterChange } className="form-control">
+          <select onChange={ props.onPeopleEaterChange } className="form-control">
+          <option>select</option>
           <option value={true}>yes</option>
           <option value={false}>no</option>
           </select>
@@ -98,7 +49,6 @@ var FishForm = React.createClass({
       </form>
       </div>
     )
-  }
-});
+};
 
 module.exports = FishForm;

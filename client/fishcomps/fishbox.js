@@ -8,8 +8,9 @@
     //LOADER
 
 var React = require('react');
-var FishList = require('./fishlist');
-var FishForm = require('./fishform');
+var FishListData = require('./fishlistdata');
+var FishFormData = require('./fishformdata');
+var FishDetailsData = require('./fishdetailsdata');
 //FishBox
   //FishList
     //FishCard
@@ -19,8 +20,8 @@ var Toggler = React.createClass({
     return (
         <div className="container">
           <div className="btn-group" data-toggle="buttons">
-          <button onClick={this.props.toggleActivecomp.bind(null, 'fish')}className="btn btn-primary">Fish Display</button>
-            <button onClick={this.props.toggleActivecomp.bind(null, 'form')}className="btn btn-primary">Modify Fish</button>
+          <button onClick={this.props.toggleActiveComp.bind(null, 'fish')}className="btn btn-primary">Fish Display</button>
+            <button onClick={this.props.toggleActiveComp.bind(null, 'form')}className="btn btn-primary">Modify Fish</button>
         </div>
       </div>
     )
@@ -30,32 +31,38 @@ var Toggler = React.createClass({
 var FishBox = React.createClass({
   getInitialState: function(){
     return{
-      activeComponent: 'fish'
+      activeComponent: 'fish',
+      activeFishId: null,
     }
+  },
+
+  getId: function(id) {
+    return this.setState({ activeFishId: id, activeComponent: 'oneFish' })
   },
 
   showComp: function(){
     if(this.state.activeComponent === 'fish'){
-      return <FishList fishArray={ this.props.fishArray }/>
+      return <FishListData getId={this.getId} />
     } else if (this.state.activeComponent === 'form'){
-      return <FishForm submitFishToServer={ this.props.submitFishToServer} />
+      return <FishFormData toggleActiveComp={this.toggleActiveComp} />
+    } else if (this.state.activeComponent === 'oneFish'){
+      return <FishDetailsData id={this.state.activeFishId} />
     } else {
-      return <FishList fishArray={this.props.fishArray}/>
+      throw new Error("Invalid activeComponent", this.state.activeComponent)
     }
   },
 
-  toggleActivecomp: function(name){
+  toggleActiveComp: function(name){
     this.setState({activeComponent: name})
   },
 
   render: function() {
-    console.log(this.props.fishArray)
     return (
-      <div className="container myContainer">
-      <Toggler toggleActivecomp={this.toggleActivecomp}/>
-        { this.showComp() }
-      </div>
-    )
+        <div className="container myContainer">
+          <Toggler toggleActiveComp={this.toggleActiveComp}/>
+          { this.showComp() }
+        </div>
+      )
   }
 });
 
