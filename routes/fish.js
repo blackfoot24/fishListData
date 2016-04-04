@@ -11,7 +11,7 @@ router.route('/')
       } else {
         res.json(fishes)
       }
-  })
+  });
 })
 
 //POST FISH TO /api/fish
@@ -32,8 +32,8 @@ router.route('/')
     } else {
       res.json(fish);
     }
-  })
-});
+  });
+})
 
 router.route('/oneFish/:fish_id')
 //GET ONE FISH FROM /API/FISH/ID_NUMBER
@@ -44,8 +44,40 @@ router.route('/oneFish/:fish_id')
       } else {
         res.json(fish);
       }
-    })
-  });
+    });
+  })
+
+  //don't forget put means edit!
+  .put(function(req, res){
+    Fish.findById( req.params.fish_id, function(err, fish){
+      if(err) {
+      } else {
+        fish.name = req.body.name ? req.body.name : fish.name;
+        fish.color = req.body.color ? req.body.color : fish.color;
+        fish.length = req.body.length ? req.body.length : fish.length;
+        fish.people_eater = req.body.people_eater ? req.body.people_eater : fish.people_eater;
+        fish.img = req.body.img ? req.body.img : fish.img;
+        fish.save(function(err){
+          if(err){
+            res.status(500).send(err, 'put is working');
+          } else {
+            res.json(fish);
+          }
+        })
+      }
+    });
+  })
+
+  .delete(function(req, res){
+    //Must past in a query parameter, { }
+    Fish.remove({_id: req.params.fish_id}, function(err, fish){
+      if(err){
+        res.status(500).send(err, 'Delete is working');
+      } else {
+        res.json(fish);
+      }
+    });
+  })
 
 router.route('/man_eater')
   .get(function(req, res){
@@ -55,8 +87,8 @@ router.route('/man_eater')
       } else {
         res.json(fish);
       }
-    })
-  });
+    });
+  })
 
 
 module.exports = router;

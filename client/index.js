@@ -8,6 +8,7 @@ var Bears = require('./bears');
 var Switch = require('./switch');
 var Beer = require('./beer');
 var FishApp = require('./fishapp');
+var Notifier = require('./notifier');
 
 
 
@@ -65,15 +66,17 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
-        <NavBar setActiveComponent={this.setActiveComponent} />
-        <div>
-          {this.showWhichComponent()}
-        </div>
-        <Footer />
+        <Notifier>
+          <NavBar setActiveComponent={this.setActiveComponent} />
+            <div>
+              {this.showWhichComponent()}
+            </div>
+          <Footer />
+        </Notifier>
       </div>
       )
   }
-})
+});
 
 ReactDom.render(
   <App />, document.getElementById('app')

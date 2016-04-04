@@ -19,6 +19,7 @@ function fishCard(props) {
           <h3 className=""> { props.people_eater } </h3>
           <h4 className=""> { props.color } </h4>
           <button onClick={props.getId.bind(null, props.id)} className="btn btn-primary">Go</button>
+          <button onClick={props.deleteFish.bind(null, props.id)} className="btn btn-primary">Delete</button>
           <p className="card-text">This is FishCard!</p>
         </div>
       </div>

@@ -12,6 +12,10 @@ var FishFormData = React.createClass({
     }
   },
 
+  contextTypes: {
+    sendNotification: React.PropTypes.func.isRequired
+  },
+
   onNameChange: function(event) {
     this.setState({ fishName: event.target.value })
     console.log("name", this.state.fishName)
@@ -49,6 +53,7 @@ var FishFormData = React.createClass({
       people_eater: this.state.peopleEater
     };
 
+
     var self = this;
     $.ajax({
       url: '/api/fish',
@@ -57,6 +62,7 @@ var FishFormData = React.createClass({
     }).done(function(data){
       console.log("Indide Post fish success", data);
       self.props.toggleActiveComp('fish');
+      self.context.sendNotification('Added Fish!!!!');
     });
 
     this.setState({name: '', color: '', length: '', img: ''});
